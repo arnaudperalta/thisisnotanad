@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds2hp3u3pbqj8"]
+
+[ext_resource type="PackedScene" uid="uid://b0erlkhr7v8n" path="res://graphics/characters/character-male-c.glb" id="1_4sos3"]
+[ext_resource type="Script" path="res://scenes/characters/Soldier.cs" id="1_vsdg6"]
+
+[node name="Soldier" type="Node3D"]
+script = ExtResource("1_vsdg6")
+
+[node name="Model" parent="." instance=ExtResource("1_4sos3")]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://by1vwrlalv6lp"]
+
+[ext_resource type="Script" path="res://scenes/level/Defense.cs" id="1_g2pm3"]
+[ext_resource type="PackedScene" uid="uid://ds2hp3u3pbqj8" path="res://scenes/characters/soldier.tscn" id="1_y3xno"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cy2y0"]
+size = Vector3(4.55798, 1.74817, 1.87109)
+
+[node name="Defense" type="Node3D"]
+script = ExtResource("1_g2pm3")
+
+[node name="SoldiersSpawnPoint" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="SoldiersSpawnPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.443, 0, 0.371)
+
+[node name="Marker3D2" type="Marker3D" parent="SoldiersSpawnPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0508, 0, 0.371)
+
+[node name="DefenseHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0282902, -2.38419e-07, -0.000690222)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DefenseHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.208313, 0.374084, 0.435547)
+shape = SubResource("BoxShape3D_cy2y0")
+
+[node name="Soldiers" type="Node3D" parent="."]
+
+[node name="Soldier" parent="Soldiers" instance=ExtResource("1_y3xno")]
