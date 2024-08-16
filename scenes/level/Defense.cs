@@ -26,7 +26,6 @@ public partial class Defense : Node3D
 
         foreach (Soldier soldier in GetNode<Node3D>("Soldiers").GetChildren())
         {
-            soldier.Walk();
             var position = soldier.Position;
             position.X += related_speed * (float)delta;
             soldier.Position = position;

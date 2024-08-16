@@ -3,12 +3,12 @@ using System;
 
 public partial class Soldier : Node3D
 {
-    public void Walk()
-    {
-        var animationPlayer = GetNode<Node3D>("Model").GetNode<AnimationPlayer>("AnimationPlayer");
-        if (!animationPlayer.IsPlaying())
-        {
-            animationPlayer.Play("sprint");
-        }
-    }
+
+  private AnimationPlayer animationPlayer;
+
+  public override void _Ready()
+  {
+    animationPlayer = GetNode<Node3D>("Model").GetNode<AnimationPlayer>("AnimationPlayer");
+    animationPlayer.Play("sprint");
+  }
 }
