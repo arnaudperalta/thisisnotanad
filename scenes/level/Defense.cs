@@ -25,7 +25,7 @@ public partial class Defense : Node3D
 
     private void MoveSoldiers(Direction direction, double delta)
     {
-        var related_speed = direction == Direction.RIGHT ? STEP_DISTANCE : STEP_DISTANCE * -1;
+        var related_speed = direction == Direction.RIGHT ? STEP_DISTANCE : -STEP_DISTANCE;
 
         foreach (Soldier soldier in GetNode<Node3D>("Soldiers").GetChildren())
         {
@@ -37,14 +37,32 @@ public partial class Defense : Node3D
 
     public void SpawnSoldiers(int count)
     {
-        for (int i = 0; i < count; i++)
+        if (count > 0)
         {
-            float randomX = (float)(GD.Randf() * 2.0 - 1.0) * SPAWN_RADIUS;
-            float randomZ = (float)(GD.Randf() * 2.0 - 1.0) * SPAWN_RADIUS;
+            for (int i = 0; i < count; i++)
+            {
+                float randomX = GD.Randf() * SPAWN_RADIUS;
+                float randomZ = GD.Randf() * SPAWN_RADIUS;
 
-            var instance = soldierScene.Instantiate<Soldier>();
-            instance.Position = new Vector3(randomX, 0, randomZ);
-            GetNode<Node3D>("Soldiers").AddChild(instance);
+                var instance = soldierScene.Instantiate<Soldier>();
+                instance.Position = new Vector3(randomX, 0, randomZ);
+                GetNode<Node3D>("Soldiers").AddChild(instance);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < -count; i++)
+            {
+                for (int j = 0; j < GetNode<Node3D>("Soldiers").GetChildCount(); j++)
+                {
+                    var soldierToDelete = GetNode<Node3D>("Soldiers").GetChild(j);
+                    if (!soldierToDelete.IsQueuedForDeletion())
+                    {
+                        soldierToDelete.QueueFree();
+                        break;
+                    }
+                }
+            }
         }
     }
 

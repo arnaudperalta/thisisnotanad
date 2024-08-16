@@ -35,7 +35,7 @@ public partial class CountGate : Node3D
 
     private void OnNegativeGateBodyEntered(StaticBody3D body)
     {
-        EmitSignal(SignalName.CountGateEntered, choiceBValue * -1);
+        EmitSignal(SignalName.CountGateEntered, -choiceBValue);
         QueueFree();
     }
 
