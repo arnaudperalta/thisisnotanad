@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dg46fyntqh44d"]
+[gd_scene load_steps=6 format=3 uid="uid://dg46fyntqh44d"]
 
+[ext_resource type="Script" path="res://scenes/level/CountGate.cs" id="1_cria7"]
 [ext_resource type="PackedScene" uid="uid://8jabxkd0dpio" path="res://graphics/building/rail.glb" id="1_sqgkk"]
 [ext_resource type="Texture2D" uid="uid://bnskdr1x5p8ko" path="res://scenes/level/count_gate_blue_gradient.tres" id="2_uct10"]
 [ext_resource type="Texture2D" uid="uid://ciyog7roh4l07" path="res://scenes/level/count_gate_red_gradient.tres" id="3_ngpxc"]
@@ -8,6 +9,7 @@
 size = Vector3(0.890381, 0.376709, 0.0316086)
 
 [node name="CountGate" type="Node3D"]
+script = ExtResource("1_cria7")
 
 [node name="ChoiceA" parent="." instance=ExtResource("1_sqgkk")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -1.421, 0, 0)
@@ -26,10 +28,6 @@ texture = ExtResource("2_uct10")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.195383, 0)
 text = "oui"
 
-[node name="Label3D2" type="Label3D" parent="ChoiceA/Area3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.863035, 0.188611, 0)
-text = "non"
-
 [node name="ChoiceB" parent="." instance=ExtResource("1_sqgkk")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.263, 0, 0)
 
@@ -42,3 +40,7 @@ shape = SubResource("BoxShape3D_i1mso")
 [node name="Sprite3D" type="Sprite3D" parent="ChoiceB/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000144541, 0.180639, 0.00608444)
 texture = ExtResource("3_ngpxc")
+
+[node name="Label3D" type="Label3D" parent="ChoiceB/Area3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0316312, 0.188611, 0)
+text = "non"
