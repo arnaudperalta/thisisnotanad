@@ -38,6 +38,13 @@ move_right={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Soldiers"
+3d_physics/layer_2="Projectiles"
+3d_physics/layer_3="Targets"
+3d_physics/layer_4="Zombies"
+
 [rendering]
 
 renderer/rendering_method="mobile"

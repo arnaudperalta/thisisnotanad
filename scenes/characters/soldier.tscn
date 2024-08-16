@@ -14,6 +14,7 @@ script = ExtResource("1_vsdg6")
 [node name="Model" parent="." instance=ExtResource("1_4sos3")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.327679, 0)
@@ -29,5 +30,6 @@ wait_time = 0.5
 autostart = true
 
 [node name="Projectiles" type="Node3D" parent="EquippedWeapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.318673, 0.410917, 0.392796)
 
 [connection signal="timeout" from="EquippedWeapon/Timer" to="." method="OnEquippedWeaponTimerTimeout"]

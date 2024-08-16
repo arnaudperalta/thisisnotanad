@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ciyog7roh4l07" path="res://scenes/level/count_gate_red_gradient.tres" id="3_ngpxc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i1mso"]
-size = Vector3(0.890381, 0.376709, 0.0316086)
+size = Vector3(0.890381, 0.376709, 0.216651)
 
 [node name="CountGate" type="Node3D"]
 script = ExtResource("1_cria7")
@@ -15,9 +15,11 @@ script = ExtResource("1_cria7")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -1.421, 0, 0)
 
 [node name="Area3D" type="Area3D" parent="ChoiceA"]
+collision_layer = 4
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ChoiceA/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0152588, 0.207397, 0.00608444)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0152588, 0.207397, 0.00876736)
 shape = SubResource("BoxShape3D_i1mso")
 
 [node name="Sprite3D" type="Sprite3D" parent="ChoiceA/Area3D"]
@@ -32,6 +34,8 @@ text = "oui"
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.263, 0, 0)
 
 [node name="Area3D" type="Area3D" parent="ChoiceB"]
+collision_layer = 4
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ChoiceB/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0152588, 0.207397, 0.00608444)
