@@ -3,7 +3,7 @@ using System;
 
 public partial class Level : Node3D
 {
-    private float GRID_STEP_DISTANCE = 2f;
+    private float GRID_STEP_DISTANCE = 3f;
     private int FLOOR_ITEM_ID = 29;
     private int ROAD_SIDE_WIDTH = 3;
     private GridMap gridMap;
@@ -38,10 +38,16 @@ public partial class Level : Node3D
 
         if (gridMapRow.Z % 10 == 0 && lastRowGenerated != gridMapRow.Z)
         {
-            var countGateInstance = countGateScene.Instantiate<Node3D>();
+            var countGateInstance = countGateScene.Instantiate<CountGate>();
+            countGateInstance.CountGateEntered += OnCountGateEntered;
             countGateInstance.Position = new Vector3(0, 0.3f, gridMapRow.Z);
             gridMap.AddChild(countGateInstance);
             lastRowGenerated = gridMapRow.Z;
         }
+    }
+
+    private void OnCountGateEntered(int value)
+    {
+        GetNode<Defense>("Defense").SpawnSoldiers(value);
     }
 }

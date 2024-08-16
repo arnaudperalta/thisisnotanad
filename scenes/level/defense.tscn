@@ -9,13 +9,7 @@ size = Vector3(4.55798, 1.74817, 1.87109)
 [node name="Defense" type="Node3D"]
 script = ExtResource("1_g2pm3")
 
-[node name="SoldiersSpawnPoint" type="Node3D" parent="."]
-
-[node name="Marker3D" type="Marker3D" parent="SoldiersSpawnPoint"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.443, 0, 0.371)
-
-[node name="Marker3D2" type="Marker3D" parent="SoldiersSpawnPoint"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0508, 0, 0.371)
+[node name="SoldiersSpawnPoint" type="Marker3D" parent="."]
 
 [node name="DefenseHitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0282902, -2.38419e-07, -0.000690222)
