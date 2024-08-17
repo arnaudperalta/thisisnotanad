@@ -21,15 +21,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.327679, 0)
 shape = SubResource("CapsuleShape3D_fxeak")
 
 [node name="EquippedWeapon" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29833, 0.390036, 0.233057)
 
-[node name="Pistol" parent="EquippedWeapon" instance=ExtResource("3_b0lvp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.317472, 0.363598, 0.197692)
+[node name="WeaponModel" parent="EquippedWeapon" instance=ExtResource("3_b0lvp")]
 
 [node name="Timer" type="Timer" parent="EquippedWeapon"]
 wait_time = 0.5
 autostart = true
 
 [node name="Projectiles" type="Node3D" parent="EquippedWeapon"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.318673, 0.410917, 0.392796)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00295642, 0.0528948, 0.222874)
 
 [connection signal="timeout" from="EquippedWeapon/Timer" to="." method="OnEquippedWeaponTimerTimeout"]

@@ -10,6 +10,7 @@ public partial class Level : Node3D
     private Vector3 generationTreshold;
     private enum Obstacles { COUNT_GATE, ZOMBIES, WEAPONS_GATE };
     private PackedScene countGateScene = GD.Load<PackedScene>("res://scenes/level/count_gate.tscn");
+    private PackedScene weaponObstacleScene = GD.Load<PackedScene>("res://scenes/level/weapon_obstacle.tscn");
     private int lastRowGenerated;
 
     public override void _Ready()
@@ -38,16 +39,36 @@ public partial class Level : Node3D
 
         if (gridMapRow.Z % 10 == 0 && lastRowGenerated != gridMapRow.Z)
         {
+            SpawnObstacle(gridMapRow.Z);
+        }
+    }
+
+    private void SpawnObstacle(int zAxis)
+    {
+        if (GD.Randi() % 2 == 0)
+        {
             var countGateInstance = countGateScene.Instantiate<CountGate>();
             countGateInstance.CountGateEntered += OnCountGateEntered;
-            countGateInstance.Position = new Vector3(0, 0.3f, gridMapRow.Z);
+            countGateInstance.Position = new Vector3(0, 0.3f, zAxis);
             gridMap.AddChild(countGateInstance);
-            lastRowGenerated = gridMapRow.Z;
         }
+        else
+        {
+            var weaponObstacleInstance = weaponObstacleScene.Instantiate<WeaponObstacle>();
+            weaponObstacleInstance.WeaponObstacleDestroyed += OnWeaponObstacleDestroyed;
+            weaponObstacleInstance.Position = new Vector3(0, 0.3f, zAxis);
+            gridMap.AddChild(weaponObstacleInstance);
+        }
+        lastRowGenerated = zAxis;
     }
 
     private void OnCountGateEntered(int value)
     {
         GetNode<Defense>("Defense").SpawnSoldiers(value);
+    }
+
+    private void OnWeaponObstacleDestroyed(string gunType)
+    {
+        GetNode<Defense>("Defense").EquipWeapons(gunType);
     }
 }

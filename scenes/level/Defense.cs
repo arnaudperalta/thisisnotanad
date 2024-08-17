@@ -6,10 +6,13 @@ public partial class Defense : Node3D
 
     private static float STEP_DISTANCE = 2f;
     private static float SPAWN_RADIUS = 1f;
+    private static int MAX_DEFENSE_SIZE = 50;
 
     private enum Direction { LEFT, RIGHT }
 
     private PackedScene soldierScene = GD.Load<PackedScene>("res://scenes/characters/soldier.tscn");
+
+    private string weaponTypeEquipped = "pistol";
 
     public override async void _Process(double delta)
     {
@@ -41,11 +44,16 @@ public partial class Defense : Node3D
         {
             for (int i = 0; i < count; i++)
             {
+                if (GetNode<Node3D>("Soldiers").GetChildCount() > MAX_DEFENSE_SIZE)
+                {
+                    break;
+                }
                 float randomX = GD.Randf() * SPAWN_RADIUS;
                 float randomZ = GD.Randf() * SPAWN_RADIUS;
 
                 var instance = soldierScene.Instantiate<Soldier>();
                 instance.Position = new Vector3(randomX, 0, randomZ);
+                instance.EquipWeapon(weaponTypeEquipped);
                 GetNode<Node3D>("Soldiers").AddChild(instance);
             }
         }
@@ -63,6 +71,16 @@ public partial class Defense : Node3D
                     }
                 }
             }
+        }
+    }
+
+    public void EquipWeapons(string gunType)
+    {
+        weaponTypeEquipped = gunType;
+        for (int i = 0; i < GetNode<Node3D>("Soldiers").GetChildCount(); i++)
+        {
+            var soldier = GetNode<Node3D>("Soldiers").GetChild<Soldier>(i);
+            soldier.EquipWeapon(gunType);
         }
     }
 

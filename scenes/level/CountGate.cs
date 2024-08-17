@@ -6,10 +6,15 @@ public partial class CountGate : Node3D
     [Signal]
     public delegate void CountGateEnteredEventHandler(int value);
 
+    private static int CHOICE_HEALTH = 10;
+
     private uint choiceAValue;
     private uint choiceBValue;
     private Label3D choiceALabel;
     private Label3D choiceBLabel;
+
+    private int choiceAHP = CHOICE_HEALTH;
+    private int choiceBHP = CHOICE_HEALTH;
 
     public override void _Ready()
     {
@@ -31,15 +36,20 @@ public partial class CountGate : Node3D
 
     private void OnPositiveGateBodyEntered(StaticBody3D body)
     {
-        if (body.CollisionLayer == 1)
+        if (body.CollisionLayer == 1) // If it's a soldier
         {
             EmitSignal(SignalName.CountGateEntered, choiceAValue);
             QueueFree();
         }
-        else
+        else if (body.CollisionLayer == 2) // If it's a projectile
         {
-            choiceAValue++;
-            choiceALabel.Text = $"+{choiceAValue}";
+            choiceAHP--;
+            if (choiceAHP <= 0)
+            {
+                choiceAHP = CHOICE_HEALTH;
+                choiceAValue++;
+                choiceALabel.Text = $"+{choiceAValue}";
+            }
             body.GetParent().QueueFree();
         }
     }
@@ -51,10 +61,15 @@ public partial class CountGate : Node3D
             EmitSignal(SignalName.CountGateEntered, -choiceBValue);
             QueueFree();
         }
-        else
+        else if (body.CollisionLayer == 2) // If it's a projectile
         {
-            choiceBValue++;
-            choiceBLabel.Text = $"-{choiceBValue}";
+            choiceBHP--;
+            if (choiceBHP <= 0)
+            {
+                choiceBHP = CHOICE_HEALTH;
+                choiceBValue++;
+                choiceBLabel.Text = $"-{choiceBValue}";
+            }
             body.GetParent().QueueFree();
         }
     }
