@@ -8,6 +8,8 @@ public partial class Defense : Node3D
     private static float SPAWN_RADIUS = 1f;
     private static int MAX_DEFENSE_SIZE = 50;
 
+    private static float MAX_TURN_DISTANCE = 3;
+
     private enum Direction { LEFT, RIGHT }
 
     private PackedScene soldierScene = GD.Load<PackedScene>("res://scenes/characters/soldier.tscn");
@@ -34,7 +36,10 @@ public partial class Defense : Node3D
         {
             var position = soldier.Position;
             position.X += related_speed * (float)delta;
-            soldier.Position = position;
+            if (position.X > -MAX_TURN_DISTANCE && position.X < MAX_TURN_DISTANCE) // If the new position is valid
+            {
+                soldier.Position = position;
+            }
         }
     }
 
@@ -82,6 +87,13 @@ public partial class Defense : Node3D
             var soldier = GetNode<Node3D>("Soldiers").GetChild<Soldier>(i);
             soldier.EquipWeapon(gunType);
         }
+    }
+
+    private void OnDefenseBodyEntered(StaticBody3D body)
+    {
+        GD.Print("hit");
+        GetNode<Node3D>("Soldiers").GetChild<Soldier>(-1).QueueFree();
+        body.GetParent().QueueFree();
     }
 
 }

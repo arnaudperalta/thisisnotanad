@@ -11,6 +11,7 @@ public partial class Level : Node3D
     private enum Obstacles { COUNT_GATE, ZOMBIES, WEAPONS_GATE };
     private PackedScene countGateScene = GD.Load<PackedScene>("res://scenes/level/count_gate.tscn");
     private PackedScene weaponObstacleScene = GD.Load<PackedScene>("res://scenes/level/weapon_obstacle.tscn");
+    private PackedScene zombieWaveScene = GD.Load<PackedScene>("res://scenes/level/zombie_wave.tscn");
     private int lastRowGenerated;
 
     public override void _Ready()
@@ -45,12 +46,20 @@ public partial class Level : Node3D
 
     private void SpawnObstacle(int zAxis)
     {
-        if (GD.Randi() % 2 == 0)
+        var random = GD.Randi() % 3;
+        if (random == 0)
         {
             var countGateInstance = countGateScene.Instantiate<CountGate>();
             countGateInstance.CountGateEntered += OnCountGateEntered;
             countGateInstance.Position = new Vector3(0, 0.3f, zAxis);
             gridMap.AddChild(countGateInstance);
+        }
+        else if (random == 1)
+        {
+            var zombieWaveInstance = zombieWaveScene.Instantiate<ZombieWave>();
+            zombieWaveInstance.AddZombies(5);
+            zombieWaveInstance.Position = new Vector3(0, 0.3f, zAxis);
+            gridMap.AddChild(zombieWaveInstance);
         }
         else
         {
