@@ -1,0 +1,45 @@
+name: Stable release builds
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  GODOT_VERSION: 4.3
+  EXPORT_NAME: ThisIsNotAnAd
+  TAG: v1.0
+
+jobs:
+  export-windows:
+    name: Windows Export 🗔
+    runs-on: ubuntu-latest
+    container:
+      image: docker://barichello/godot-ci:4.3
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Setup 💻
+        run: |
+          mkdir -v -p build/${EXPORT_NAME}-Windows-64bit ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Import resources once 📦
+        continue-on-error: true
+        run: godot --headless -v --import
+      - name: Windows Build 🔧
+        run: |
+          godot --headless -v --export-release "Windows Desktop 64-bit" ./build/${EXPORT_NAME}-Windows-64bit/${EXPORT_NAME}.exe
+      - name: Zip 🗜️
+        working-directory: ./build
+        run: |
+          zip -r ${EXPORT_NAME}-Windows-64bit.zip ${EXPORT_NAME}-Windows-64bit
+      - name: Upload Release Asset 🚀
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./build/*
+          tag: ${{env.TAG}}
+          overwrite: true
+          file_glob: true
