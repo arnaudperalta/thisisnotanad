@@ -3,9 +3,8 @@
 [ext_resource type="Script" path="res://scenes/characters/Zombie.cs" id="1_1gyqa"]
 [ext_resource type="PackedScene" uid="uid://c0pbhcjx333ec" path="res://graphics/characters/character-zombie.glb" id="1_g2q5d"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s6r7x"]
-radius = 0.286149
-height = 0.923679
+[sub_resource type="BoxShape3D" id="BoxShape3D_c3pa7"]
+size = Vector3(0.585022, 1.39236, 0.848511)
 
 [node name="Zombie" type="Node3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -18,7 +17,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.380666, 0)
-shape = SubResource("CapsuleShape3D_s6r7x")
+transform = Transform3D(1, 8.74194e-08, 8.66462e-08, -8.74194e-08, 0.00888355, 0.999961, 8.66462e-08, -0.999961, 0.00888355, -0.0487365, 0.30986, -0.556208)
+shape = SubResource("BoxShape3D_c3pa7")
 
 [connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]

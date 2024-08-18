@@ -25,9 +25,15 @@ public partial class Level : Node3D
 
     public override void _Process(double delta)
     {
+        if (Name != "Level")
+        {
+            Name = "Level";
+        }
         // If no soldiers are alive, we stop the game
         if (GetNode("Defense/Soldiers").GetChildCount() == 0)
         {
+            GetTree().Root.GetNode<Ui>("UI").gameIsFinished = true;
+            GetTree().Root.GetNode<Control>("UI/GameOverUI").Visible = true;
             return;
         }
 
@@ -67,7 +73,7 @@ public partial class Level : Node3D
         else if (random < 8)
         {
             var zombieWaveInstance = zombieWaveScene.Instantiate<ZombieWave>();
-            zombieWaveInstance.AddZombies((int)GD.Randi() % 1 + (int)(elapsedTimeInSeconds / 5));
+            zombieWaveInstance.AddZombies((int)GD.Randi() % 1 + (int)(elapsedTimeInSeconds / 3));
             zombieWaveInstance.Position = new Vector3(0, 0.3f, zAxis);
             gridMap.AddChild(zombieWaveInstance);
         }
