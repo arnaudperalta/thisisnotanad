@@ -19,7 +19,7 @@ jobs:
       run: |
         wget https://downloads.tuxfamily.org/godotengine/4.3/mono/Godot_v4.3-stable_mono_linux_x86_64.zip -O godot.zip
         unzip godot.zip -d godot
-        chmod +x godot/Godot_v4.3-stable_mono_linux_x86_64/Godot_v4.3-stable_mono_linux_x86_64
+        chmod +x godot/Godot_v4.3-stable_mono_linux_x86_64/Godot_v4.3-stable_mono_linux.x86_64
         sudo mv godot/Godot_v4.3-stable_mono_linux_x86_64 /usr/local/bin/godot
 
     # Step 3: Build the Godot project
