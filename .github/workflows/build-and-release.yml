@@ -30,7 +30,7 @@ jobs:
         run: godot --headless -v --import
       - name: Windows Build 🔧
         run: |
-          godot --headless -v --export-release "Windows Desktop 64-bit" ./build/${EXPORT_NAME}-Windows-64bit/${EXPORT_NAME}.exe
+          godot --headless -v --export-release "Windows Desktop" ./build/${EXPORT_NAME}-Windows-64bit/${EXPORT_NAME}.exe
       - name: Zip 🗜️
         working-directory: ./build
         run: |
