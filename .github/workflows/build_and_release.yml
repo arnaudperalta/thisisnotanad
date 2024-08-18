@@ -25,7 +25,7 @@ jobs:
     # Step 3: Build the Godot project
     - name: Build the Godot C# project
       run: |
-        /usr/local/bin/godot/Godot_v4.3-stable_mono_linux.x86_64 --export "Windows Desktop" build/game.exe
+        /usr/local/bin/godot/Godot_v4.3-stable_mono_linux.x86_64 --export-release "Windows Desktop" build/game.exe
 
     # Step 4: Upload the built file as an artifact
     - name: Upload built executable
