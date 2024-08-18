@@ -89,11 +89,9 @@ public partial class Defense : Node3D
         }
     }
 
-    private void OnDefenseBodyEntered(StaticBody3D body)
+    public void OnAreaEntered(Area3D area)
     {
-        GD.Print("hit");
         GetNode<Node3D>("Soldiers").GetChild<Soldier>(-1).QueueFree();
-        body.GetParent().QueueFree();
+        area.GetParent().QueueFree();
     }
-
 }

@@ -6,6 +6,7 @@ public partial class Level : Node3D
     private float GRID_STEP_DISTANCE = 3f;
     private int FLOOR_ITEM_ID = 29;
     private int ROAD_SIDE_WIDTH = 3;
+    private int ROW_BETWEEN_EVENTS = 5;
     private GridMap gridMap;
     private Vector3 generationTreshold;
     private enum Obstacles { COUNT_GATE, ZOMBIES, WEAPONS_GATE };
@@ -13,6 +14,8 @@ public partial class Level : Node3D
     private PackedScene weaponObstacleScene = GD.Load<PackedScene>("res://scenes/level/weapon_obstacle.tscn");
     private PackedScene zombieWaveScene = GD.Load<PackedScene>("res://scenes/level/zombie_wave.tscn");
     private int lastRowGenerated;
+    private double elapsedTimeInSeconds = 0;
+
 
     public override void _Ready()
     {
@@ -22,6 +25,13 @@ public partial class Level : Node3D
 
     public override void _Process(double delta)
     {
+        // If no soldiers are alive, we stop the game
+        if (GetNode("Defense/Soldiers").GetChildCount() == 0)
+        {
+            return;
+        }
+
+        elapsedTimeInSeconds += delta;
         // Moving backward the gridmap
         var gridMapPosition = gridMap.Position;
         gridMapPosition.Z -= GRID_STEP_DISTANCE * (float)delta;
@@ -38,7 +48,7 @@ public partial class Level : Node3D
             gridMap.SetCellItem(new Vector3I(x, 0, gridMapRow.Z), FLOOR_ITEM_ID);
         }
 
-        if (gridMapRow.Z % 10 == 0 && lastRowGenerated != gridMapRow.Z)
+        if (gridMapRow.Z % ROW_BETWEEN_EVENTS == 0 && lastRowGenerated != gridMapRow.Z)
         {
             SpawnObstacle(gridMapRow.Z);
         }
@@ -57,7 +67,7 @@ public partial class Level : Node3D
         else if (random == 1)
         {
             var zombieWaveInstance = zombieWaveScene.Instantiate<ZombieWave>();
-            zombieWaveInstance.AddZombies(5);
+            zombieWaveInstance.AddZombies((int)GD.Randi() % 3 + (int)(elapsedTimeInSeconds / 5));
             zombieWaveInstance.Position = new Vector3(0, 0.3f, zAxis);
             gridMap.AddChild(zombieWaveInstance);
         }

@@ -5,38 +5,6 @@
 [node name="ZombieWave" type="Node3D"]
 script = ExtResource("1_m72pm")
 
-[node name="SpawnPoints" type="Node3D" parent="."]
-
-[node name="Marker3D" type="Marker3D" parent="SpawnPoints"]
-
-[node name="Marker3D2" type="Marker3D" parent="SpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275, 0, -0.545)
-
-[node name="Marker3D3" type="Marker3D" parent="SpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.256, 0, -0.28)
-
-[node name="Marker3D4" type="Marker3D" parent="SpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.267, 0, 0.481)
-
-[node name="Marker3D5" type="Marker3D" parent="SpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.258, 0, 0.422)
-
-[node name="Marker3D6" type="Marker3D" parent="SpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.548, 0, 0.242)
-
-[node name="Marker3D7" type="Marker3D" parent="SpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.593, 0, -0.382)
-
-[node name="Marker3D8" type="Marker3D" parent="SpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.565, 0, -0.313)
-
-[node name="Marker3D9" type="Marker3D" parent="SpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.796, 0, 0.281)
-
-[node name="Marker3D10" type="Marker3D" parent="SpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.661, 0, -0.912)
-
-[node name="Marker3D11" type="Marker3D" parent="SpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.915, 0, 0.385)
+[node name="SpawnPoint" type="Marker3D" parent="."]
 
 [node name="Zombies" type="Node3D" parent="."]

@@ -9,7 +9,7 @@ public partial class Zombie : Node3D
 
     public override void _Ready()
     {
-        GetNode<Node3D>("Model").GetNode<AnimationPlayer>("AnimationPlayer").Play("sprint");
+        GetNode<Node3D>("Model").GetNode<AnimationPlayer>("AnimationPlayer").Play("walk");
     }
 
     private void OnBodyEntered(StaticBody3D body)
@@ -21,6 +21,7 @@ public partial class Zombie : Node3D
             {
                 QueueFree();
             }
+            body.GetParent().QueueFree();
         }
     }
 }

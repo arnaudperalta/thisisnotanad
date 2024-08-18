@@ -6,7 +6,7 @@ public partial class CountGate : Node3D
     [Signal]
     public delegate void CountGateEnteredEventHandler(int value);
 
-    private static int CHOICE_HEALTH = 10;
+    private static int CHOICE_HEALTH = 20;
 
     private uint choiceAValue;
     private uint choiceBValue;
@@ -20,8 +20,8 @@ public partial class CountGate : Node3D
     {
         choiceALabel = GetNode<Label3D>("ChoiceA/Area3D/Label3D");
         choiceBLabel = GetNode<Label3D>("ChoiceB/Area3D/Label3D");
-        choiceAValue = GD.Randi() % 10;
-        choiceBValue = GD.Randi() % 10;
+        choiceAValue = GD.Randi() % 5;
+        choiceBValue = GD.Randi() % 5;
         if (GD.Randi() % 2 == 0)
         {
             Rotate(new Vector3(0, 1, 0), Mathf.DegToRad(180));

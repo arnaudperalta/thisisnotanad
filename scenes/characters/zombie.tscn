@@ -13,10 +13,12 @@ script = ExtResource("1_1gyqa")
 
 [node name="Model" parent="." instance=ExtResource("1_g2q5d")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Area3D" type="Area3D" parent="."]
 collision_layer = 8
-collision_mask = 3
+collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.380666, 0)
 shape = SubResource("CapsuleShape3D_s6r7x")
+
+[connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]

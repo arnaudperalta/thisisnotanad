@@ -21,4 +21,5 @@ shape = SubResource("BoxShape3D_cy2y0")
 
 [node name="Soldier" parent="Soldiers" instance=ExtResource("1_y3xno")]
 
-[connection signal="body_entered" from="DefenseHitbox" to="." method="OnDefenseBodyEntered"]
+[connection signal="area_entered" from="DefenseHitbox" to="." method="OnAreaEntered"]
+[connection signal="body_entered" from="DefenseHitbox" to="." method="OnBodyEntered"]
