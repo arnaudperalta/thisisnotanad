@@ -5,7 +5,8 @@ public partial class Level : Node3D
 {
     private float GRID_STEP_DISTANCE = 3f;
     private int FLOOR_ITEM_ID = 29;
-    private int ROAD_SIDE_WIDTH = 3;
+    private int WALL_ITEM_ID = 80;
+    private int ROAD_SIDE_WIDTH = 4;
     private int ROW_BETWEEN_EVENTS = 5;
     private GridMap gridMap;
     private Vector3 generationTreshold;
@@ -15,6 +16,7 @@ public partial class Level : Node3D
     private PackedScene zombieWaveScene = GD.Load<PackedScene>("res://scenes/level/zombie_wave.tscn");
     private int lastRowGenerated;
     private double elapsedTimeInSeconds = 0;
+    private bool isGameOver = false;
 
 
     public override void _Ready()
@@ -29,9 +31,15 @@ public partial class Level : Node3D
         {
             Name = "Level";
         }
-        // If no soldiers are alive, we stop the game
-        if (GetNode("Defense/Soldiers").GetChildCount() == 0)
+        if (GetNode("Defense/Soldiers").GetChildCount() != 0)
         {
+            isGameOver = false;
+        }
+        // If no soldiers are alive, we stop the game
+        if (isGameOver) { return; }
+        if (!isGameOver && GetNode("Defense/Soldiers").GetChildCount() == 0)
+        {
+            isGameOver = true;
             GetTree().Root.GetNode<Ui>("UI").gameIsFinished = true;
             GetTree().Root.GetNode<Control>("UI/GameOverUI").Visible = true;
             return;
@@ -49,10 +57,14 @@ public partial class Level : Node3D
         // Generating new cells
         var gridMapRow = gridMap.LocalToMap(generationTreshold);
 
+        // Drawing the road
         for (int x = -ROAD_SIDE_WIDTH; x < ROAD_SIDE_WIDTH; x++)
         {
             gridMap.SetCellItem(new Vector3I(x, 0, gridMapRow.Z), FLOOR_ITEM_ID);
         }
+        // Drawing the walls
+        gridMap.SetCellItem(new Vector3I(-ROAD_SIDE_WIDTH, 1, gridMapRow.Z), WALL_ITEM_ID, 16);
+        gridMap.SetCellItem(new Vector3I(ROAD_SIDE_WIDTH - 1, 1, gridMapRow.Z), WALL_ITEM_ID, 16);
 
         if (gridMapRow.Z % ROW_BETWEEN_EVENTS == 0 && lastRowGenerated != gridMapRow.Z)
         {

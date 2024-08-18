@@ -33,9 +33,19 @@ public partial class Ui : Control
     private void OnRetryButtonPressed()
     {
         GetNode<Control>("GameOverUI").Visible = false;
+        ResetGame();
         GetTree().Root.GetNode("Level").QueueFree();
         var instance = levelScene.Instantiate<Node3D>();
         GetTree().Root.AddChild(instance);
+    }
+
+    private void ResetGame()
+    {
+        var gameState = GetTree().Root.GetNode<GameState>("GameState");
+        gameState.weaponTypeEquipped = "pistol";
+        score = 0;
+        elapsedTimeInSeconds = 0;
+        gameIsFinished = false;
     }
 
 }

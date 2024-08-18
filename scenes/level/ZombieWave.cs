@@ -11,7 +11,7 @@ public partial class ZombieWave : Node3D
     {
         for (int i = 0; i < count; i++)
         {
-            float randomX = GD.RandRange(-3, 3);
+            float randomX = (float)GD.RandRange(-2.7, 2.7);
             float randomZ = GD.Randf() * SPAWN_RADIUS;
 
             var instance = zombieScene.Instantiate<Zombie>();
