@@ -7,7 +7,7 @@ public partial class ZombieWave : Node3D
 
     private static float SPAWN_RADIUS = 1f;
 
-    public void AddZombies(int count)
+    public void AddZombies(int count, int health)
     {
         for (int i = 0; i < count; i++)
         {
@@ -15,6 +15,7 @@ public partial class ZombieWave : Node3D
             float randomZ = GD.Randf() * SPAWN_RADIUS;
 
             var instance = zombieScene.Instantiate<Zombie>();
+            instance.SetHealth(health);
             instance.Position = new Vector3(randomX, 0, randomZ);
             GetNode<Node3D>("Zombies").AddChild(instance);
         }

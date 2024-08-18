@@ -29,6 +29,11 @@ public partial class WeaponObstacle : Node3D
             var instance = minigunScene.Instantiate<Node3D>();
             GetNode("Weapon").AddChild(instance);
         }
+        else if (equippedWeapon == "minigun")
+        {
+            weaponType = "none";
+            obstacleHP += 1000;
+        }
         GetNode<Label3D>("ObstacleHPLabel").Text = $"{obstacleHP}";
         var position = Position;
         position.X = Position.X + (GD.Randi() % 2 == 0 ? 1.5f : -1.5f);
@@ -46,7 +51,11 @@ public partial class WeaponObstacle : Node3D
             obstacleHP--;
             if (obstacleHP == 0)
             {
-                EmitSignal(SignalName.WeaponObstacleDestroyed, weaponType);
+                if (weaponType != "none")
+                {
+                    EmitSignal(SignalName.WeaponObstacleDestroyed, weaponType);
+
+                }
                 QueueFree();
                 return;
             }

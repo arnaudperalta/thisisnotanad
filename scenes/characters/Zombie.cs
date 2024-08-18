@@ -3,13 +3,17 @@ using System;
 
 public partial class Zombie : Node3D
 {
-    private static int DEFAULT_ZOMBIE_HP = 5;
 
-    private int healthPoint = DEFAULT_ZOMBIE_HP;
+    private int healthPoint = 1;
 
     public override void _Ready()
     {
         GetNode<Node3D>("Model").GetNode<AnimationPlayer>("AnimationPlayer").Play("walk");
+    }
+
+    public void SetHealth(int value)
+    {
+        healthPoint = value;
     }
 
     private void OnBodyEntered(StaticBody3D body)

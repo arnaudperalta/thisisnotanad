@@ -13,6 +13,7 @@ script = ExtResource("1_4cjvn")
 
 [node name="ScoreContainer" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 15.0
@@ -28,6 +29,7 @@ text = "Score: 0"
 
 [node name="TimeContainer" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
