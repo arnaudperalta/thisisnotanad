@@ -24,6 +24,10 @@ GameState="*res://scenes/level/game_state.tscn"
 
 project/assembly_name="ThisIsNotAnAd"
 
+[editor]
+
+export/convert_text_resources_to_binary=false
+
 [filesystem]
 
 import/fbx/enabled=false
