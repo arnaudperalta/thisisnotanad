@@ -1,4 +1,4 @@
-## This is not an Ad
+## This is not an ad
 
 My first game ever, done with the Godot game engine.
 

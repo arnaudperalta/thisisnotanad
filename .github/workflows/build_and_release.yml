@@ -17,10 +17,10 @@ jobs:
     # Step 2: Install Godot and Mono
     - name: Install Godot with Mono
       run: |
-        wget https://downloads.tuxfamily.org/godotengine/4.3/mono/Godot_v4.3-stable_mono_x11.64.zip -O godot.zip
+        wget https://downloads.tuxfamily.org/godotengine/4.3/mono/Godot_v4.3-stable_mono_linux_x86_64.zip -O godot.zip
         unzip godot.zip -d godot
-        chmod +x godot/Godot_v4.3-stable_mono_x11.64/Godot_v4.3-stable_mono_x11.64
-        sudo mv godot/Godot_v4.3-stable_mono_x11.64 /usr/local/bin/godot
+        chmod +x godot/Godot_v4.3-stable_mono_linux_x86_64/Godot_v4.3-stable_mono_linux_x86_64
+        sudo mv godot/Godot_v4.3-stable_mono_linux_x86_64 /usr/local/bin/godot
 
     # Step 3: Build the Godot project
     - name: Build the Godot C# project
