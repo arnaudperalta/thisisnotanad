@@ -6,67 +6,31 @@ on:
       - 'v*'
 
 jobs:
-  build:
+  export_game:
     runs-on: ubuntu-latest
-
+    name: Export Game Job
     steps:
-    # Step 1: Checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    # Step 2: Install Godot and Mono
-    - name: Install Godot with Mono
-      run: |
-        wget https://downloads.tuxfamily.org/godotengine/4.3/mono/Godot_v4.3-stable_mono_linux_x86_64.zip -O godot.zip
-        unzip godot.zip -d godot
-        chmod +x godot/Godot_v4.3-stable_mono_linux_x86_64/Godot_v4.3-stable_mono_linux.x86_64
-        sudo mv godot/Godot_v4.3-stable_mono_linux_x86_64 /usr/local/bin/godot
-
-    # Step 3: Build the Godot project
-    - name: Build the Godot C# project
-      run: |
-        /usr/local/bin/godot/Godot_v4.3-stable_mono_linux.x86_64 --export-release "Windows Desktop" build/game.exe
-
-    # Step 4: Upload the built file as an artifact
-    - name: Upload built executable
-      uses: actions/upload-artifact@v3
-      with:
-        name: GameExe
-        path: build/game.exe
-
-  release:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-    # Step 1: Checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    # Step 2: Download build artifact
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: GameExe
-
-    # Step 3: Create a release and upload the .exe file
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
-
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: build/game.exe
-        asset_name: game.exe
-        asset_content_type: application/octet-stream
+      - name: checkout
+        uses: actions/checkout@v3.3.0
+      - name: install wine
+        id: wine_install
+        run: |
+          sudo apt install wine64
+          echo "WINE_PATH=$(which wine64)" >> $GITHUB_OUTPUT
+      - name: export game
+        id: export
+        uses: firebelley/godot-export@v5.2.0
+        with:
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_export_templates.tpz
+          relative_project_path: ./
+          relative_export_path: ./build
+          archive_output: true
+          wine_path: ${{ steps.wine_install.outputs.WINE_PATH }}
+      - name: create release
+        uses: ncipollo/release-action@v1.11.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generateReleaseNotes: true
+          tag: ${{ github.ref_name }}
+          artifacts: ${{ steps.export.outputs.archive_directory }}
