@@ -14,8 +14,6 @@ public partial class Defense : Node3D
 
     private PackedScene soldierScene = GD.Load<PackedScene>("res://scenes/characters/soldier.tscn");
 
-    private string weaponTypeEquipped = "pistol";
-
     public override async void _Process(double delta)
     {
         if (Input.IsActionPressed("move_right"))
@@ -58,7 +56,7 @@ public partial class Defense : Node3D
 
                 var instance = soldierScene.Instantiate<Soldier>();
                 instance.Position = new Vector3(randomX, 0, randomZ);
-                instance.EquipWeapon(weaponTypeEquipped);
+                instance.EquipWeapon(GetTree().Root.GetNode<GameState>("GameState").weaponTypeEquipped);
                 GetNode<Node3D>("Soldiers").AddChild(instance);
             }
         }
@@ -81,7 +79,7 @@ public partial class Defense : Node3D
 
     public void EquipWeapons(string gunType)
     {
-        weaponTypeEquipped = gunType;
+        GetTree().Root.GetNode<GameState>("GameState").weaponTypeEquipped = gunType;
         for (int i = 0; i < GetNode<Node3D>("Soldiers").GetChildCount(); i++)
         {
             var soldier = GetNode<Node3D>("Soldiers").GetChild<Soldier>(i);

@@ -15,6 +15,11 @@ run/main_scene="res://scenes/level/level.tscn"
 config/features=PackedStringArray("4.3", "C#", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+UI="*res://scenes/ui/ui.tscn"
+GameState="*res://scenes/level/game_state.tscn"
+
 [dotnet]
 
 project/assembly_name="ThisIsNotAnAd"

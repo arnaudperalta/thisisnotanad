@@ -19,7 +19,11 @@ public partial class Zombie : Node3D
             --healthPoint;
             if (healthPoint <= 0)
             {
-                QueueFree();
+                if (!IsQueuedForDeletion())
+                {
+                    GetTree().Root.GetNode<Ui>("UI").AddScore(1);
+                    QueueFree();
+                }
             }
             body.GetParent().QueueFree();
         }

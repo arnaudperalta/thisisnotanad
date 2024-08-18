@@ -20,8 +20,8 @@ public partial class CountGate : Node3D
     {
         choiceALabel = GetNode<Label3D>("ChoiceA/Area3D/Label3D");
         choiceBLabel = GetNode<Label3D>("ChoiceB/Area3D/Label3D");
-        choiceAValue = GD.Randi() % 5;
-        choiceBValue = GD.Randi() % 5;
+        choiceAValue = (GD.Randi() % 4) + 1;
+        choiceBValue = (GD.Randi() % 4) + 1;
         if (GD.Randi() % 2 == 0)
         {
             Rotate(new Vector3(0, 1, 0), Mathf.DegToRad(180));

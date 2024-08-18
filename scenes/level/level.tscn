@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqux87ojjtk1w"]
+[gd_scene load_steps=4 format=3 uid="uid://cqux87ojjtk1w"]
 
 [ext_resource type="PackedScene" uid="uid://by1vwrlalv6lp" path="res://scenes/level/defense.tscn" id="1_mrgo0"]
 [ext_resource type="Script" path="res://scenes/level/Level.cs" id="1_nhsnq"]
 [ext_resource type="MeshLibrary" uid="uid://cs5vdixiyf33e" path="res://graphics/building/building-mesh-library.tres" id="2_ev0j2"]
-[ext_resource type="PackedScene" uid="uid://b3muwwreht7f6" path="res://scenes/ui/ui.tscn" id="4_msp2x"]
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_nhsnq")
@@ -29,5 +28,3 @@ sky_mode = 1
 
 [node name="GenerationTreshold" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21)
-
-[node name="UI" parent="." instance=ExtResource("4_msp2x")]

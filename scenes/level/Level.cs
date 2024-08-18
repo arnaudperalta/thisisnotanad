@@ -56,18 +56,18 @@ public partial class Level : Node3D
 
     private void SpawnObstacle(int zAxis)
     {
-        var random = GD.Randi() % 3;
-        if (random == 0)
+        var random = GD.Randi() % 10;
+        if (random < 3)
         {
             var countGateInstance = countGateScene.Instantiate<CountGate>();
             countGateInstance.CountGateEntered += OnCountGateEntered;
             countGateInstance.Position = new Vector3(0, 0.3f, zAxis);
             gridMap.AddChild(countGateInstance);
         }
-        else if (random == 1)
+        else if (random < 8)
         {
             var zombieWaveInstance = zombieWaveScene.Instantiate<ZombieWave>();
-            zombieWaveInstance.AddZombies((int)GD.Randi() % 3 + (int)(elapsedTimeInSeconds / 5));
+            zombieWaveInstance.AddZombies((int)GD.Randi() % 1 + (int)(elapsedTimeInSeconds / 5));
             zombieWaveInstance.Position = new Vector3(0, 0.3f, zAxis);
             gridMap.AddChild(zombieWaveInstance);
         }

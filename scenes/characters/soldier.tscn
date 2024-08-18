@@ -23,7 +23,9 @@ shape = SubResource("CapsuleShape3D_fxeak")
 [node name="EquippedWeapon" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29833, 0.390036, 0.233057)
 
-[node name="WeaponModel" parent="EquippedWeapon" instance=ExtResource("3_b0lvp")]
+[node name="Model" type="Node3D" parent="EquippedWeapon"]
+
+[node name="WeaponModel" parent="EquippedWeapon/Model" instance=ExtResource("3_b0lvp")]
 
 [node name="Timer" type="Timer" parent="EquippedWeapon"]
 wait_time = 0.5
